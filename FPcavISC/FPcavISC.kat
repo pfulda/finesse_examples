@@ -12,9 +12,9 @@ l laser 1 0 nlaser
 s laser2EOM 1 nlaser nEOMin
 mod EOM $fmod 0.1 1 pm nEOMin nEOMtrans
 s EOM2Steer1 0 nEOMtrans nSteer1in
-bs Steer1 1 0 45 0 nSteer1in nSteer1refl dump dump
+bs Steer1 1 0 0 45 nSteer1in nSteer1refl dump dump
 s Steer1toSteer2 1 nSteer1refl	nSteer2in
-bs Steer2 1 0 45 0 nSteer2in nSteer2refl dump dump
+bs Steer2 1 0 0 45 nSteer2in nSteer2refl dump dump
 s Steer2toBSpickoff 0 nSteer2refl nBSin
 bs BSpickoff 0.5 0.5 0 45 nBSin dump nBStrans nBSreturn
 s BS2ITM 1 nBStrans nITMin
