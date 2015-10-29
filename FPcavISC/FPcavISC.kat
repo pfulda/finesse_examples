@@ -1,0 +1,38 @@
+# FPcavISC.kat 
+# Simple cavity, PDH signal in reflection.
+# 
+# For use with PDH_ASC_signal.ipynb  
+#
+# P. Fulda 2015.10.26
+######################################################
+
+
+# interferometer parts
+l laser 1 0 nlaser
+s laser2EOM 1 nlaser nEOMin
+mod EOM $fmod 0.1 1 pm nEOMin nEOMtrans
+s EOM2Steer1 0 nEOMtrans nSteer1in
+bs Steer1 1 0 45 0 nSteer1in nSteer1refl dump dump
+s Steer1toSteer2 1 nSteer1refl	nSteer2in
+bs Steer2 1 0 45 0 nSteer2in nSteer2refl dump dump
+s Steer2toBSpickoff 0 nSteer2refl nBSin
+bs BSpickoff 0.5 0.5 0 45 nBSin dump nBStrans nBSreturn
+s BS2ITM 1 nBStrans nITMin
+m ITM 0.99 0.01 0 nITMin nITMtrans
+s cavityspace 1 nITMtrans nETMin
+m ETM 0.995 0.005 0 nETMin nETMtrans
+s BSpickoff2REFLBS 0 nBSreturn nREFLBSin
+bs REFLBS 0.5 0.5 0 45 nREFLBSin nREFLBSrefl nREFLBStrans dump
+s sREFLBSrefl2PDHandWFSA 0 nREFLBSrefl nPDHandWFSA
+s sREFLBStrans2GPTlens 1 nREFLBStrans nGPTlensin
+lens GPTlens 0.1 nGPTlensin nGPTlensout
+s sGPTlens2WFSB 1 nGPTlensout nWFSB
+
+cav cavity ITM nITMtrans ETM nETMin
+attr ETM Rc 2
+
+const fmod 9M
+const nfmod -9M
+
+phase 2
+
