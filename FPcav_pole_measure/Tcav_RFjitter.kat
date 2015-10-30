@@ -1,0 +1,37 @@
+# Tcav_RFjitter.kat 
+# Triangular cavity, PDH signal in reflection.
+#
+# P. Fulda 2015.10.28
+######################################################
+
+
+# interferometer parts
+l laser 1 0 nlaser
+s laser2EOM 1 nlaser nfixedEOMin
+mod fixedEOM $fmod 0.1 1 pm nfixedEOMin nfixedEOMtrans
+s fixedEOM2sweptEOM 0 nfixedEOMtrans nsweptEOMin
+mod sweptEOM 1 0.1 1 pm nsweptEOMin nsweptEOMtrans
+s sweptEOM2sweptEOAM 0 nsweptEOMtrans nsweptEOAMin
+mod sweptEOAM 1 0 1 am nsweptEOAMin nsweptEOAMtrans
+s sweptEOAM2Steer1 0 nsweptEOAMtrans nSteer1in
+bs Steer1 1 0 0 45 nSteer1in nSteer1refl dump dump
+s Steer1toSteer2 1 nSteer1refl	nSteer2in
+bs Steer2 1 0 0 45 nSteer2in nSteer2refl dump dump
+
+s BS2MC1 1 nSteer2refl nMC1in
+
+bs MC1 0.98 0.01 0 44.5 nMC1in nMCREFL nMC1trans nMC1ret
+s MC1toMC3 0.1 nMC1trans nMC3in
+bs MC3 0.98 0.01 0 44.5 nMC3in nMC3refl nMCTRANS nMC3ret
+s MC3toMC2 1 nMC3refl nMC2in
+bs MC2 0.99 0.002 0 1 nMC2in nMC2refl nMC2trans dump
+s MC2toMC1 1 nMC2refl nMC1ret
+
+cav TMC MC2 nMC2refl MC2 nMC2in
+
+attr MC2 Rc 10
+
+const fmod 26.272M
+const nfmod -26.272M
+
+phase 2

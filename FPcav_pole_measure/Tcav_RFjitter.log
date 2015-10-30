@@ -1,0 +1,28 @@
+
+------------------------------------------------------------------------
+                     FINESSE pre-2.1.0    (build pre-2.1.0-177-g0bde7a5)
+       o_.-=.        Frequency domain INterferomEter Simulation SoftwarE
+      (\'".\|        29.10.2015         http://www.gwoptics.org/finesse/
+      .>' (_--.      
+   _=/d   ,^\        Input file Tcav_RFjitter.kat,
+  ~~ \)-'   '        Output file Tcav_RFjitter.out,
+     / |             Gnuplot file Tcav_RFjitter.gnu 
+    '  '                                        Fri Oct 30 14:08:08 2015
+------------------------------------------------------------------------
+** Switching on higher-order modes and setting maxtem 0
+ --- cavity tracing
+ cavity TMC:
+  cavity is stable! Eigenvalues:
+  qx=-1.05+3.06527j, w0x=1.0188975mm zx=-1.05m mx=0.789968
+  qy=-1.05+3.0658j, w0y=1.0189842mm zy=-1.05m my=0.790032
+  finesse : 124.522, round-trip power loss: 0.049204 [/100]
+  opt. length: 2.1m, FSR: 142.75831MHz
+  FWHM: 1.1464503MHz (pole: 573.22517kHz)
+ 
+ 
+ am_trans (y1) max x 576766.4634 : 0.004336237477 min x 1 : 1.484561157e-08 
+ am_trans (y2) max x 1 : 89.99980249 min x 10000000 : -96.15353686 
+ am_in (y1) max x 1 : 0 min x 1 : 0 
+ am_in (y2) max x 1 : 0 min x 1 : 0 
+ writing matlab/python/gnuplot batch files...
+ calling gnuplot...
