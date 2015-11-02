@@ -1,0 +1,87 @@
+#---------------------------------------------------------------------------
+# Bullseye.kat test file for Finesse 1.1
+# (…………………)
+# 10.05.2015
+#                            dump
+#                                                        
+#                             n4                                          
+#        .-----.     	     .——-.              .——.                     .--.    .----.      
+#        |     |    . . .    |   |    . . .     |  |      . . . . .      |  |    |    |  
+# --> n1 | EOM | n2 .s1 . n3 |bs1| n5 .s2 .  n6 |m1|  n7  . s_cav .  n8  |m2| n9 |dc1 | 
+#        |     |    . . .    |   |    . . .     |  |      . . . . .      |  |    |    |  
+#        `-----'     	     |   | 	        |  |                     |  |    '----'    
+#                    	     `——-‘ 	        ‘--‘                     ‘--‘
+#
+#                  	      n10
+#
+#			   . . . .
+#		    	   . s3  .
+#		    	   . . . .
+#
+#			     n11
+#
+#			    .---.			.-----. .-----.
+#		     	    |   |	. . . .         |     | |     |
+#	 	  dump  n14 |bs2|  n12  .  s4 .   n15   | bpd2| |gouy2|
+#		     	    |   |       . . . .	 	|     | |     |
+#		     	    |   |			‘-----‘ ‘-----‘
+#		     	    ‘---'
+#		       	     n13
+#		       .-----.	.-----.
+#		       |     |	|     |
+#		       |gouy1|	| bpd1|
+#		       |     |	|     |
+#		       ‘-----‘	‘-----‘
+#---------------------------------------------------------------------------
+
+l l1 1 0 n1                		 # laser P=1W f_offset=0Hz
+
+mod eom 9M 0.1 3 pm n1 n2 		 # phase modulator f_mod=40kHz
+s s1 0.1 n2 n3                           # midx=0.1 order=3 
+
+bs bs1 0.5 0.5 0 45 n3 dump n5 n10 	 # first beam splitter
+s s2 0.2 n5 n6
+
+                   	        	 # a Fabry-Perot cavity
+m m1 0.99 0.01 0 n6 n7  	  		 # mirror R=0.9 T=0.01 phi=0
+s s_cav 1 n7 n8         	 	 # space L=1m
+m m2 0.99 0.01 0 n8 n9      	 	 # mirror R=0.8 T=0.01 phi=0
+attr m2 Rc 2
+cav cav1 m1 n7 m2 n8
+
+gauss mygauss m1 n6 581.96367u 0 
+				 	 # detectors
+s s3 0.2 n10 n11
+bs bs2 0.5 0.5 0 45 n11 n12 n13 dump 	 # second beam spliter
+
+#pd dc1 n9
+pd1 inphase 9M 174.24 n15        	 # photo detector + mixer
+#pd1 bpd1 9M 174.24 n13			 # First bullseye detector
+#pdtype bpd1 bullseye
+
+s s4 1.935 n12 n15
+#pd1 bpd2 9M 174.24 n13			 # Second bullseye detector
+#pdtype bpd2 bullseye
+
+                            		 # f_demod=9MHz phase=0
+#xaxis m2 phi lin -50 50 500  		 # xaxis: phi at mirror m1
+xaxis inphase phase lin 0 360 500
+#diff m2 phi
+
+#xaxis mygauss zrx lin 0.8 1.2 200	 	 #Variable definition for modes
+#put mygauss zry $x1
+maxtem 8
+
+#xaxis mygauss zx lin -0.5 0.5 200	 	 #Variable definition for modes
+#put mygauss zy $x1
+                            		 # from -50 to 50 (500 steps)
+#trace 2
+
+#xaxis s4 L lin 1.8 2 200
+#xaxis s_cav L lin 0.5 1.5 200
+#gouy gouy1 x s	 		 # Gouy detectors for difference between bullseye
+#gouy gouy2 x s4			 # detectors
+
+gnuterm x11                 		 # gnuplot terminal: x11
+
+
