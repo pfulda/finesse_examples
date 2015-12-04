@@ -1,0 +1,82 @@
+
+%%% FTblock nonedited
+l laser 1 0 nlaser
+s slasertoL1 0 nlaser nL1in
+lens L1 inf nL1in nL1out
+s sL1toEOBD 0 nL1out nEOBDin
+bs EOBD 1 0 0 45 nEOBDin nEOBDrefl dump dump
+s sEOBDtoL2 4.807739 nEOBDrefl nL2in 
+lens L2 4 nL2in nL2out
+s sL2toSteer1 0 nL2out nSteer1in
+bs Steer1 1 0 0 45 nSteer1in nSteer1out dump dump
+s sSteer1toSteer2 23.8 nSteer1out nSteer2in
+bs Steer2 1 0 0 45 nSteer2in nSteer2out dump dump
+s sSteer2toIM 0 nSteer2out nIMin 
+
+s scav 0.21 nIMout nEMin
+
+cav FPC IM nIMout EM nEMin
+attr EM Rc 1
+
+const mfreq 108155000
+const nmfreq -108155000
+#xaxis Steer1 xbeta lin 0 1u 100
+#xaxis Steer1 xbeta lin 0 1u 100
+#put Steer2 xbeta $x1
+
+xaxis jittermod f lin 1 800M 1000
+#xaxis jittermod f lin 106M 111M 1000
+
+#func Iphase=(-1)*pi()*pi()*(9.6725E-9)*$x1*360-180
+#func Qphase=(-1)*pi()*pi()*(9.6725E-9)*$x1*360-90
+func Iphase=(-1)*(9.542515E-08)*$x1*360+181
+func Qphase=(-1)*(9.542515E-08)*$x1*360+91
+
+noplot Iphase
+noplot Qphase
+
+#pd1 pdREFL $mfreq nIMin
+#put pdREFL f $x1
+#put pdREFL phase1 $phase_comp
+
+
+pd1 pdREFL_I $mfreq 0 nIMin
+put pdREFL_I f $x1
+put pdREFL_I phase1 $Iphase
+pd1 pdREFL_Q $mfreq 0 nIMin
+put pdREFL_Q f $x1
+put pdREFL_Q phase1 $Qphase
+
+
+/*
+ad cavinput_HG00_car 0 0 0 nIMin*
+ad cavinput_HG00_usb 0 0 $mfreq nIMin*
+ad cavinput_HG00_lsb 0 0 $mfreq nIMin*
+
+ad cavinput_HG10_car 1 0 0 nIMin*
+ad cavinput_HG10_usb 1 0 $mfreq nIMin*
+ad cavinput_HG10_lsb 1 0 $mfreq nIMin*
+
+ad cavinput_HG20_car 2 0 0 nIMin*
+ad cavinput_HG20_usb 2 0 $mfreq nIMin*
+ad cavinput_HG20_lsb 2 0 $mfreq nIMin*
+*/
+
+#put cavinput_HG10_usb f $x1
+#put cavinput_HG10_lsb f $x1 
+
+#*/
+#gouy Steer1to2gouy x sSteer1toSteer2
+#gouy EOBDtoIM x sEOBDtoL2 sL2toSteer1 sSteer1toSteer2 sSteer2toIM
+#gouy cavgouy x scav
+
+#yaxis abs:deg
+maxtem 4
+trace 2
+trace 8
+#noxaxis
+gnuterm no
+%%% FTend nonedited
+
+%%% FTblock edited
+%%% FTend edited
