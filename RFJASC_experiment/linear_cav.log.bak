@@ -1,0 +1,23 @@
+
+------------------------------------------------------------------------
+                     FINESSE pre-2.1.0    (build pre-2.1.0-214-gb47a545)
+       o_.-=.        Frequency domain INterferomEter Simulation SoftwarE
+      (\'".\|        29.12.2015         http://www.gwoptics.org/finesse/
+      .>' (_--.      
+   _=/d   ,^\        Input file linear_cav.kat,
+  ~~ \)-'   '        Output file linear_cav.out,
+     / |             Gnuplot file linear_cav.gnu 
+    '  '                                        Mon Jan  4 21:21:47 2016
+------------------------------------------------------------------------
+ --- cavity tracing
+ cavity FPC:
+  cavity is stable! Eigenvalues:
+  q=0.407308j, w0=371.41332um z=0m m=0.58
+  finesse : 110.614, round-trip power loss: 0.055216 [/100]
+  opt. length: 420mm, FSR: 713.79157MHz
+  FWHM: 6.4529906MHz (pole: 3.2264953MHz)
+  RT Gouy: 54.549457 deg (mode sep.: 108.15817MHz)
+ 
+ 
+ writing matlab/python/gnuplot batch files...
+ calling gnuplot...

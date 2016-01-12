@@ -1,0 +1,46 @@
+
+------------------------------------------------------------------------
+                     FINESSE pre-2.1.0    (build pre-2.1.0-214-gb47a545)
+       o_.-=.        Frequency domain INterferomEter Simulation SoftwarE
+      (\'".\|        29.12.2015         http://www.gwoptics.org/finesse/
+      .>' (_--.      
+   _=/d   ,^\        Input file check_jitter_mod.kat,
+  ~~ \)-'   '        Output file check_jitter_mod.out,
+     / |             Gnuplot file check_jitter_mod.gnu 
+    '  '                                        Wed Dec 30 15:10:50 2015
+------------------------------------------------------------------------
+--- tracing the beam through optical system, 
+ found 4 of 4 nodes:
+ (w0 : waist radius, w : beam radius, z: distance to waist, 
+  z_R: Rayleigh range, q : complex beam parameter
+  and gamma: far field angle
+0: node nlaser(0); slaser2eobd(0), laser(2); n=1  (laser --> nlaser)
+   x, y: w0=300um w=300.21234um z=10mm z_R=265.73622mm Rc=7.0715739m
+   q=(0.01 + 0.265736220698385i) gamma=1.1289391mrad
+1: node neobdin(1); slaser2eobd(0), eobd(3); n=1  (slaser2eobd --> neobdin)
+   x, y: w0=300um w=300.84847um z=20mm z_R=265.73622mm Rc=3.5507869m
+   q=(0.02 + 0.265736220698385i) gamma=1.1289391mrad
+2: node neobdout(2); eobd(3), seobd2dets(1); n=1  (eobd --> neobdout)
+   x, y: w0=300um w=300.84847um z=20mm z_R=265.73622mm Rc=3.5507869m
+   q=(0.02 + 0.265736220698385i) gamma=1.1289391mrad
+3: node ndets(3); seobd2dets(1), ---(-32768); n=1  (seobd2dets --> ndets)
+   x, y: w0=300um w=300.84847um z=20mm z_R=265.73622mm Rc=3.5507869m
+   q=(0.02 + 0.265736220698385i) gamma=1.1289391mrad
+
+ 
+ adHG00USB (y1) max x 1e-09 : 0 min x 1e-09 : 0 
+ adHG00USB (y2) max x 1e-09 : 0 min x 1e-09 : 0 
+ adHG10USB (y1) max x 1e-09 : 0 min x 1e-09 : 0 
+ adHG10USB (y2) max x 1e-09 : 0 min x 1e-09 : 0 
+ adHG01USB (y1) max x 0.0001 : 0.04441463066 min x 1e-09 : 4.441463066e-07 
+ adHG01USB (y2) max x 1e-09 : 98.60822997 min x 1e-09 : 98.60822997 
+ adHG00LSB (y1) max x 1e-09 : 0 min x 1e-09 : 0 
+ adHG00LSB (y2) max x 1e-09 : 0 min x 1e-09 : 0 
+ adHG10LSB (y1) max x 1e-09 : 0 min x 1e-09 : 0 
+ adHG10LSB (y2) max x 1e-09 : 0 min x 1e-09 : 0 
+ adHG01LSB (y1) max x 0.0001 : 0.04441463066 min x 1e-09 : 4.441463066e-07 
+ adHG01LSB (y2) max x 1e-09 : 98.60822997 min x 1e-09 : 98.60822997 
+ pdRFAMcheck (y1) max x 1e-09 : 0 min x 1e-09 : 0 
+ pdRFAMcheck (y2) max x 1e-09 : 0 min x 1e-09 : 0 
+ writing matlab/python/gnuplot batch files...
+ calling gnuplot...

@@ -1,0 +1,23 @@
+l laser 1 0 nlaser
+s slaser2eobd $lspace nlaser neobdin
+mod eobd $feobd 0.1m 1 pitch 0 neobdin neobdout
+s seobd2dets 0 neobdout ndets
+gauss beamgauss laser nlaser 300u $lspace 
+
+maxtem 2
+
+ad adHG00USB 0 0 $feobd ndets
+ad adHG10USB 1 0 $feobd ndets
+ad adHG01USB 0 1 $feobd ndets
+
+ad adHG00LSB 0 0 $mfeobd ndets
+ad adHG10LSB 1 0 $mfeobd ndets
+ad adHG01LSB 0 1 $mfeobd ndets
+
+pd1 pdRFAMcheck $feobd ndets
+const feobd 1M
+const mfeobd -1M
+const lspace 0.01
+yaxis abs:deg
+xaxis eobd midx lin 1n 0.1m 1000 
+trace 8
