@@ -1,0 +1,58 @@
+# Tcav_RFjitter.kat 
+# Triangular cavity, PDH signal in reflection.
+#
+# P. Fulda 2015.10.28
+# L. Ortega 2015.12.07
+######################################################
+
+
+# interferometer parts
+
+l laser 1 0 nlaser
+s slasertoEOM 0.354 nlaser nEOM1in
+
+mod EOM1 $fmod1 0.5 1 pm nEOM1in nEOM1trans
+s sEOM1toEOBD 0.8 nEOM1trans nEOBDin
+
+mod EOBD $fjitter 1e-6 1 pitch nEOBDin nEOBDout
+s sEOBDtoL1 0.415 nEOBDout nL1in
+
+lens L1 -0.153 nL1in nL1out
+s sL1toL2 0.145 nL1out nL2in
+
+lens L2 0.256 nL2in nL2out
+s sL2toPZT5 0.71 nL2out nPZT5in
+
+bs PZT5 1 0 0 45 nPZT5in nPZT5refl dump dump
+s sPZT5toPZT4 0.32 nPZT5refl nPZT4in 
+
+bs PZT4 1 0 0 45 nPZT4in nPZT4refl dump dump
+s sPZT4toMC1 0.235 nPZT4refl nMC1in
+
+bs MC1 0.98 0.01 0 44.5 nMC1in nMCREFL nMC1trans nMC1ret
+s sMC1toMC3 0.104 nMC1trans nMC3in
+bs MC3 0.98 0.01 0 44.5 nMC3in nMC3refl nMCTRANS nMC3ret
+s sMC3toMC2 1.037 nMC3refl nMC2in
+bs MC2 0.99 0.002 0 1 nMC2in nMC2refl nMC2trans dump
+s sMC2toMC1 1.034 nMC2refl nMC1ret
+attr MC2 Rc 10
+
+cav TMC MC2 nMC2refl MC2 nMC2in
+
+s MC1toPDREFL 0.25 nMCREFL nPDREFLin
+
+pd1 PDREFLPDH_I $fmod1 88 nPDREFLin
+pd1 PDREFLPDH_Q $fmod1 -2 nPDREFLin
+
+pd1 PDREFLASC $fjitter 0 nPDREFLin
+
+maxtem 2
+const fmod1 26.717M
+const fjitter 14730000.0
+const fdither 30
+phase 2
+
+#s EOM1toPZT1 1.1174 nEOM1trans nPZT1in
+#bs PZT1 1 0 0 45 nPZT1in nPZT1refl dump dump
+#s PZT1toPZT2 0.318 nPZT1refl	nPZT2in
+#bs PZT2 1 0 0 45 nPZT2in nPZT2refl dump dump
